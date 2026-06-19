@@ -15,8 +15,14 @@ Pull the person-centric slice out of the vault: every commitment to or from a pe
 grouped by person, each with a date.
 
 ## Setup
-- Vault root: `/Users/priyank/Library/Mobile Documents/iCloud~md~obsidian/Documents/work-v2`
-- **Read `Master Context — Obsidian Vault.md`** for tagging (§5, person tags) and folders.
+- **Vault root** — resolve at runtime; never hardcode a machine path. Run:
+  ```
+  VAULT="${OBSIDIAN_VAULT:-$(cat "${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault" 2>/dev/null)}"
+  ```
+  and use `$VAULT` as the vault root throughout. If `$VAULT` is empty or not an existing
+  directory, ask the user for their Obsidian vault path and offer to save it to
+  `${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault`.
+- **Read `Master Context.md`** for tagging (§5, person tags) and folders.
 - **Read `Metadata/PeopleIndex.md` and `Metadata/ClientRegistry.md`** for the known
   person/client vocabulary, and **`Metadata/OpenLoops.md`** for already-tracked threads.
 - Get today's date with `date +%Y-%m-%d` for age / due-date math.
@@ -25,7 +31,7 @@ grouped by person, each with a date.
 1. **Gather candidate follow-ups from across the vault:**
    - Open `- [ ]` tasks in `DailyPlanner/*.md` and `DailyPlanner/Archive/*.md`
      (de-duplicated; record first-appeared date + age).
-   - Action items in `ClientMeetings/`, `InternalMeetings/`, `Feedback&ExpectationSetting/`,
+   - Action items in `ClientMeetings/`, `InternalMeetings/`, `Feedback&Expectations/`,
      and `Project/*/` notes (lines under `## Actions` / `## Follow-up`, or `- [ ]` items there).
    - Entries in `Metadata/OpenLoops.md`.
 
@@ -59,7 +65,7 @@ grouped by person, each with a date.
 
 5. **Offer next actions:** draft a short message for any follow-up; add a dated reminder
    via the `add-todo` skill; or append the commitment to the relevant
-   `Feedback&ExpectationSetting/` or `ClientMeetings/` note.
+   `Feedback&Expectations/` or `ClientMeetings/` note.
 
 ## Notes
 - Read-only by default — only write when asked.

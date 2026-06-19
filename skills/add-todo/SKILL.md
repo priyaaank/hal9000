@@ -15,8 +15,14 @@ Capture a task into the right daily planner, with a quadrant and a date — infe
 not stated.
 
 ## Setup
-- Vault root: `/Users/priyank/Library/Mobile Documents/iCloud~md~obsidian/Documents/work-v2`
-- **Read `Master Context — Obsidian Vault.md` first** — esp. §6 (Daily Planner Structure,
+- **Vault root** — resolve at runtime; never hardcode a machine path. Run:
+  ```
+  VAULT="${OBSIDIAN_VAULT:-$(cat "${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault" 2>/dev/null)}"
+  ```
+  and use `$VAULT` as the vault root throughout. If `$VAULT` is empty or not an existing
+  directory, ask the user for their Obsidian vault path and offer to save it to
+  `${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault`.
+- **Read `Master Context.md` first** — esp. §6 (Daily Planner Structure,
   Eisenhower 2×2, Work/Personal split, §6.5 template).
 - Get today's date with `date +%Y%m%d` (filename) and `date +%Y-%m-%d` (YAML / `📅`).
 

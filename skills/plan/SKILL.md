@@ -14,8 +14,14 @@ description: >-
 Build today's daily planner, carry over unfinished work safely, and archive the past.
 
 ## Setup
-- Vault root: `/Users/priyank/Library/Mobile Documents/iCloud~md~obsidian/Documents/work-v2`
-- **Read `Master Context — Obsidian Vault.md` first** — esp. §6 (Daily Planner Structure,
+- **Vault root** — resolve at runtime; never hardcode a machine path. Run:
+  ```
+  VAULT="${OBSIDIAN_VAULT:-$(cat "${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault" 2>/dev/null)}"
+  ```
+  and use `$VAULT` as the vault root throughout. If `$VAULT` is empty or not an existing
+  directory, ask the user for their Obsidian vault path and offer to save it to
+  `${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault`.
+- **Read `Master Context.md` first** — esp. §6 (Daily Planner Structure,
   template, Eisenhower 2×2, Work/Personal split) and §9 (Metadata). All formatting below
   defers to it.
 - Get today's date: `TODAY=$(date +%Y%m%d)` (filename) and `date +%Y-%m-%d` (YAML).

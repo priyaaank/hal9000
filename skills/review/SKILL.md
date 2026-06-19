@@ -16,8 +16,14 @@ Be a candid coach: read the longitudinal data, judge progress against past advic
 give specific, checkable recommendations for better habits and less procrastination.
 
 ## Setup
-- Vault root: `/Users/priyank/Library/Mobile Documents/iCloud~md~obsidian/Documents/work-v2`
-- **Read `Master Context — Obsidian Vault.md`** for conventions (esp. §6 quadrants, §9
+- **Vault root** — resolve at runtime; never hardcode a machine path. Run:
+  ```
+  VAULT="${OBSIDIAN_VAULT:-$(cat "${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault" 2>/dev/null)}"
+  ```
+  and use `$VAULT` as the vault root throughout. If `$VAULT` is empty or not an existing
+  directory, ask the user for their Obsidian vault path and offer to save it to
+  `${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault`.
+- **Read `Master Context.md`** for conventions (esp. §6 quadrants, §9
   Metadata files).
 - **Read the metadata brain first:**
   - `Metadata/IntrospectionNotes.md` — the log of past reviews + recommendations (with

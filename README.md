@@ -34,18 +34,31 @@ and the AI operating principles). No vault migration needed.
   preserve Priyank's voice, flag ambiguity, ask before bulk (>5 notes), respect
   `Thinking Space/`, never edit Master Context.
 
-### Vault path
-Hard-coded in each `SKILL.md`:
-`/Users/priyank/Library/Mobile Documents/iCloud~md~obsidian/Documents/ai-vault`.
-If the vault moves, update that path (search for `iCloud~md~obsidian/Documents/ai-vault`).
+### Vault path (externalized — no machine paths in the skills)
+The skills resolve the Obsidian vault root at runtime, in this order:
+1. the `OBSIDIAN_VAULT` environment variable, else
+2. the path stored in `${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault`, else
+3. they ask you for it (and offer to save it to that config file).
+
+Configure it once, either way:
+```bash
+# Option 1 — environment variable (add to your shell profile)
+export OBSIDIAN_VAULT="/path/to/your/Obsidian/Vault"
+
+# Option 2 — config file (works for background/cron agents too)
+mkdir -p ~/.config/hal9000
+printf '%s\n' "/path/to/your/Obsidian/Vault" > ~/.config/hal9000/vault
+```
+No absolute path is baked into any `SKILL.md` — moving machines or vaults only means
+updating the env var or that one config file.
 
 ## Install
 
 This bundle is **not installed**. Two ways to enable it:
 
-**A. Symlink each skill into `~/.claude/skills/` (matches the existing setup):**
+**A. Symlink each skill into `~/.claude/skills/`:**
 ```bash
-cd /Users/priyank/code/hal9000
+cd /path/to/hal9000   # this repo
 ./install.sh
 ```
 Because they're symlinks, editing a `SKILL.md` here takes effect immediately.

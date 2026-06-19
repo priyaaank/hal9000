@@ -16,8 +16,14 @@ Process the `Staging/` backlog: classify each note into its proper folder, restr
 the content, name and tag it per the vault conventions, and log what was moved.
 
 ## Setup
-- Vault root: `/Users/priyank/Library/Mobile Documents/iCloud~md~obsidian/Documents/work-v2`
-- **Read `Master Context — Obsidian Vault.md` first** (the authoritative reference) for
+- **Vault root** — resolve at runtime; never hardcode a machine path. Run:
+  ```
+  VAULT="${OBSIDIAN_VAULT:-$(cat "${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault" 2>/dev/null)}"
+  ```
+  and use `$VAULT` as the vault root throughout. If `$VAULT` is empty or not an existing
+  directory, ask the user for their Obsidian vault path and offer to save it to
+  `${XDG_CONFIG_HOME:-$HOME/.config}/hal9000/vault`.
+- **Read `Master Context.md` first** (the authoritative reference) for
   folder routing rules (§3), naming convention (§4), tagging system (§5), YAML front
   matter (§11), and operating principles (§12). Everything below defers to it.
 - **Read `Metadata/ClientRegistry.md` and `Metadata/PeopleIndex.md`** for the known
@@ -35,7 +41,7 @@ the content, name and tag it per the vault conventions, and log what was moved.
    1. Named client / client meeting → `ClientMeetings/`
    2. Internal leadership / office group / council / MD / team meeting → `InternalMeetings/`
    3. Daily task list or carry-over → `DailyPlanner/` (prefer the `plan` / `add-todo` skills)
-   4. Feedback or expectations about a person → `Feedback&ExpectationSetting/`
+   4. Feedback or expectations about a person → `Feedback&Expectations/`
    5. Interview notes / candidate observation → `Interviews/`
    6. Tied to a named project → `Project/<ProjectSubfolder>/`
    7. Personal (travel, finance, fitness, family) → `Personal/`
@@ -82,7 +88,7 @@ the content, name and tag it per the vault conventions, and log what was moved.
    ---
    ```
    Then add `[[WikiLinks]]` per §10 — client meeting notes link to their `Project/` note;
-   feedback notes link back to relevant meetings. For `Feedback&ExpectationSetting/`,
+   feedback notes link back to relevant meetings. For `Feedback&Expectations/`,
    **append to the existing `PersonFirstname-FeedbackLog` note** (newest entry at top)
    rather than creating a new file (§7, §12.4).
 
