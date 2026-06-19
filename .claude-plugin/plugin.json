@@ -1,0 +1,8 @@
+{
+  "name": "hal9000",
+  "description": "Obsidian vault co-pilot for Priyank's ai-vault: organize staging, plan the day, review habits, track people follow-ups, and add todos — all faithful to the vault's Master Context conventions.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Priyank Gupta"
+  }
+}
